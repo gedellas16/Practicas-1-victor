@@ -10,7 +10,7 @@ void setup()
 }
 
 void loop()
-{   if (digitalRead(10)==LOW)
+{   if (digitalRead(10)==LOW)   //aqui uso el if para condicionar el resto de salidas a su lectura
 {
   digitalWrite(LED_BUILTIN, HIGH);
   digitalWrite(13, HIGH);
