@@ -1,0 +1,88 @@
+#include <Servo.h>
+
+// C++ codePrograma para la ventanilla del coche entradas y salidas a rele digitales
+  
+//
+  #define motorArriba 12
+  #define motorAbajo 11
+  #define pulsador 7
+  
+  //int motorArriba= 12;
+  //int motorAbajo= 11;
+
+int estado= 1;
+int contador = 0; //contador impulso motor
+
+void setup()
+{ 
+  pinMode(motorArriba, OUTPUT);
+  pinMode(motorAbajo, OUTPUT);
+  pinMode(pulsador, INPUT)  ;
+ 
+ Serial.begin(9600);
+ 
+ }
+
+void loop(){
+  							//Lectura contador
+  if(digitalRead(pulsador))
+  {
+
+ estado = (++estado) % 4; //actualizacion de estado 0 e 2 
+ 							 //  if(estado > 3){
+ 							  // estado = 0;
+ 									 //  }
+   
+    
+    contador = 100;
+    while(digitalRead(pulsador))
+    {
+ 
+ delay(20);
+      
+  			 //fin lectura pulsador
+       
+      
+      
+      
+    }
+}
+  
+  Serial.print("valor contador");
+               Serial.print(contador);
+               Serial.println(estado);
+               
+  
+  
+  
+  //accionamento dos motores 
+  if (contador > 0){
+ 	 if (estado == 0){
+    
+    digitalWrite(motorArriba, HIGH);
+    digitalWrite(motorAbajo, LOW);
+    delay (70);
+  contador --;
+   
+  }
+    
+  
+
+  
+  
+    else if (estado==2){
+  digitalWrite(motorAbajo, HIGH);
+  digitalWrite(motorArriba,LOW);
+    delay (70);
+  contador --;
+    }
+    else {
+  digitalWrite(motorAbajo, LOW);
+  digitalWrite(motorArriba,LOW);
+    delay (70);
+  contador --;
+    }
+
+  }
+}
+  
