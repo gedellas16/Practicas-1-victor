@@ -45,7 +45,10 @@ void loop(){
  delay(20);
       
   			 //fin lectura pulsador
-       
+   Serial.print("estado");
+    Serial.print(estado);
+     Serial.print("      contador =");
+     Serial.println(contador);
             
     }
 }
