@@ -48,8 +48,9 @@ void loop(){
     }
 }
   
-  Serial.print("valor contador");
+  Serial.print("valor contador= ");
                Serial.print(contador);
+  Serial.print("  Estado= ");
                Serial.println(estado);
                
   
@@ -57,8 +58,8 @@ void loop(){
   
   //accionamento dos motores 
   if (contador > 0){
- 	 if (estado == 0){
-    
+
+    if (estado == 0) {
     digitalWrite(motorArriba, HIGH);
     digitalWrite(motorAbajo, LOW);
     delay (70);
@@ -80,9 +81,9 @@ void loop(){
   digitalWrite(motorAbajo, LOW);
   digitalWrite(motorArriba,LOW);
     delay (70);
-  contador --;
-    }
 
+    }
   }
-}
+  }
+
   
