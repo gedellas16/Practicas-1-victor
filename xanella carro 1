@@ -50,6 +50,7 @@ void loop(){
   
   Serial.print("valor contador");
                Serial.print(contador);
+  Serial.print(" valor estado= ");
                Serial.println(estado);
                
   
@@ -63,7 +64,7 @@ void loop(){
     digitalWrite(motorAbajo, LOW);
     delay (70);
    
-   
+   contador -- ;
   }
     
   
@@ -73,7 +74,8 @@ void loop(){
     else {
   digitalWrite(motorAbajo, HIGH);
   digitalWrite(motorArriba,LOW);
-  delay(10000);
+  delay(70);
+      contador -- ;
     }
   
 
