@@ -1,0 +1,42 @@
+
+#define rele 6
+#define luz A0
+
+int umbral = 920;
+
+int contador;
+int estado;
+
+void setup (){
+  
+pinMode(6,OUTPUT);
+// pinMode(luz,INPUT);
+  
+ Serial.begin(9600);
+   contador = 100;
+}
+
+void loop (){
+  estado = analogRead(luz);
+      //contador 100;
+  Serial.print("Estado contador:");
+  Serial.print(contador);
+  Serial.print("  Estado led:  ");
+  Serial.println(estado);
+  
+  if (estado > umbral ) {
+    if (contador > 0){
+   digitalWrite(rele,HIGH);
+    delay (70);
+ contador -- ;
+     
+    }
+
+     
+  }
+  else(estado < umbral); {
+  digitalWrite(rele, LOW);
+    
+  }
+  
+  }
