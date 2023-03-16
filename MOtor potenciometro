@@ -1,0 +1,42 @@
+#include <Servo.h>
+
+
+
+
+float vOut  ;
+float vRead = A5;
+float analogVal;
+
+
+
+int servoPin = 9;
+int servoPos = 90 ;
+Servo myServo;
+
+
+void setup() {
+      // put your setup code here, to run once:
+myServo.attach(servoPin);
+Serial.begin(9600);
+}
+
+void loop() {
+ 
+
+
+//if (Serial.available() ) {
+ // Serial.println("Que angulo quieres ?");
+  //servoPos = Serial.parseInt();
+  
+//myServo.write(servoPos);
+//}
+   //else {
+  analogVal = analogRead(vRead);
+ vOut = (5.*analogVal/1023.);
+ delay(125);
+     Serial.print("voltaje leido");
+Serial.println(vOut);
+  myServo.write(analogVal);
+  
+    //}
+}
