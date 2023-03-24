@@ -3,14 +3,14 @@
 
 
 
-float vOut  ;
-float vRead = A5;
-float analogVal;
+float vOut ;
+float potPin = A5;
+float potVal ;
 
-
+int angle = 0;
 
 int servoPin = 9;
-int servoPos = 90 ;
+int servoPos = 0 ;
 Servo myServo;
 
 
@@ -21,22 +21,20 @@ Serial.begin(9600);
 }
 
 void loop() {
- 
-
-
-//if (Serial.available() ) {
- // Serial.println("Que angulo quieres ?");
+//Serial.println("Que angulo quieres ?");
+  //delay (125);
   //servoPos = Serial.parseInt();
+  //myServo.write(servoPos);
+
+
+ if(Serial.available()== 0 ) {
   
-//myServo.write(servoPos);
-//}
-   //else {
-  analogVal = analogRead(vRead);
- vOut = (5.*analogVal/1023.);
- delay(125);
-     Serial.print("voltaje leido");
-Serial.println(vOut);
-  myServo.write(analogVal);
-  
-    //}
+potVal = analogRead(potPin);
+  angle = map(potVal, 0, 1023, 0, 180);
+  myServo.write(angle);
+  delay(15);
+   
+ }
+
+
 }
