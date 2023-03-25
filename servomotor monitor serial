@@ -1,0 +1,58 @@
+#include <Servo.h>
+
+
+
+
+float vOut ;
+float potPin = A5;
+float potVal;
+
+int angle ;
+
+int servoPin = 9;
+int servoPos  ;
+Servo myServo;
+
+
+void setup() {
+      // put your setup code here, to run once:
+  myServo.attach(servoPin);
+	Serial.begin(9600);
+}
+
+void loop() {
+ 
+  
+    Serial.print("valor voltaje  ");
+ 	Serial.println(angle);
+  if (potPin > 0){
+   analogRead(potPin);
+  potVal = analogRead(potPin);
+  angle = map(potVal, 0, 1023, 0, 180);
+  myServo.write(angle);
+delay(500);
+   }
+  if (Serial.available()) {
+    Serial.println("Que angulo quieres?  ");
+  
+    int angle = Serial.parseInt();
+    myServo.write(angle);
+    Serial.print("Servo angulo: ");
+    Serial.println(angle);
+    delay (500);
+    char instruction = Serial.read();
+   if (instruction == 'derecha') {
+      myServo.write(90);
+      Serial.println("Servomotor girado a 90 grados.");
+     delay (500);
+    } else if (instruction == 'arriba') {
+      myServo.write(180);
+      Serial.println("Servomotor girado a 180 grados.");
+     delay (500);
+    } else if (instruction == 'izquierda') {
+      myServo.write(270);
+      Serial.println("Servomotor girado a 270 grados.");
+     delay (500);
+   }
+  }
+}
