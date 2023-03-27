@@ -27,8 +27,8 @@ Data: Marzo de 2023
 // DefiniciÃ³ns do sensor HC-SR04
 #define ECHO           9
 #define TRIGGER        8
-#define DIST_MAX       200
-#define UMBRAL_DIST    12
+#define DIST_MAX       500
+#define UMBRAL_DIST    80
 
 //NewPing sonar(TRIGGER, ECHO, DIST_MAX); //Obxecto sensor de distancia para <NewPing.h>
 
@@ -41,8 +41,8 @@ Data: Marzo de 2023
 #define LR       3  // Perna dereita (Right Leg)
 #define FL       4  // PÃ© esquerdo (Left Foot)
 #define LL       2  // Perna esquerda (Left Leg)
-int distancia;
-  int tiempo;
+  float    distancia;
+  float tiempo;
 
 Servo peDer, pernaDer, peEsq, pernaEsp;  
 
@@ -57,9 +57,35 @@ void setup() {
   pernaEsp.attach(LL);
 }
 
+void loop() {
+  davidesGay();
+}
 
-void loop()
-{  
+// Funcións externas
+
+// Función que indica se o obxecto supera o 
+// umbral (true) ou non (false
+bool davidesGay() {
+  
+  bool manolo;
+  if (distanciaObxecto() < UMBRAL_DIST) { 
+    zumbar();
+  manolo = true;
+  }
+  else {
+    nonZumbar();
+        manolo = false;}
+  delay(50);
+        Serial.println(manolo);
+       
+        return manolo;
+        
+       }
+
+
+// Función que calcula a distancia ao obxecto en cm
+// Incúe unha espera de 50 ms
+float distanciaObxecto() { 
   digitalWrite(TRIGGER,HIGH);
   delayMicroseconds(10);
   digitalWrite(TRIGGER,LOW);
@@ -68,15 +94,18 @@ void loop()
    Serial.print("Distancia  ");
    Serial.print(distancia);
   Serial.println("cm  ");
-if (distancia <25){
+  return (distancia);
+}
 
+// Función que fai zumbar o zumbador durante 200 ms
+void zumbar() {
   digitalWrite (BUZZER,HIGH);
- }
+}
 
- else {
-digitalWrite (BUZZER,LOW);
- 
-  delay(100);
+// Función que apaga o zumbador durante 200 ms
+void nonZumbar() {
+  digitalWrite (BUZZER,LOW);
 }
-  
-}
+
+
+
